@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifikasi dengan Animasi Chaining jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+       body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        h1 {
+        margin-bottom: 20px; 
+        color: rgb(206, 206, 214);
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: rgb(8, 7, 7);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+       #notification {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #d7d717; 
+            color: #080707;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: none; 
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <h1>jQuery Notifikasi Chaining</h1>
+    
+    <button id="showNotification">Tampilkan Notifikasi</button>
+    <div id="notification">Ini adalah notifikasi dengan animasi chaining!</div>
+
+    <script>
+        $(document).ready(function() {
+            $('#showNotification').click(function() {
+                $('#notification')
+                    .css('background-color', '#FF308') 
+                    .fadeIn(1000) 
+                    .slideDown(1000) 
+                    .delay(3000)
+                    .slideUp(1000) 
+                    .fadeOut(1000); 
+            });
+        });
+    </script>
+</body>
+</html>

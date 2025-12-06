@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata Mahasiswa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+        }
+
+        #fotoProfil {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        #fotoProfil:hover {
+            transform: scale(1.05);
+        }
+
+        .biodata-info {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-toggle {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            grid-column: 1 / -1;
+        }
+
+        .btn-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-section">
+            <div class="profile-img-container">
+                <img id="fotoProfil" src="/Users/macbook/Downloads/IMG-20240926-WA0047 (1).jpg" alt="Foto Profil">
+            </div>
+        </div>
+
+        <div id="biodataSection" class="biodata-info">
+            <div class="info-item">
+                <div class="info-label">Nama Lengkap</div>
+                <div id="nama" class="info-value">Tsamarah Zahra Widodo</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">NIM</div>
+                <div id="nim" class="info-value">0110125120</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Program Studi</div>
+                <div id="prodi" class="info-value">Sistem Informasi</div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-primary" onclick="ubahNama()">Ubah Nama</button>
+            <button class="btn-primary" onclick="ubahProdi()">Ubah Prodi</button>
+            <button class="btn-secondary" onclick="gantiGambar()">Ganti Foto</button>
+            <button class="btn-toggle" onclick="toggleBiodata()">Sembunyikan Biodata</button>
+        </div>
+
+        <input type="file" id="inputFile" accept="image/*" onchange="uploadFoto()">
+    </div>
+
+    <script>
+        // Fungsi untuk mengubah nama menggunakan getElementById() dan innerHTML
+        function ubahNama() {
+            var namaBaru = prompt("Masukkan nama baru:");
+            if (namaBaru !== null && namaBaru.trim() !== "") {
+                var elementNama = document.getElementById("nama");
+                elementNama.innerHTML = namaBaru;
+            }
+        }
+
+        // Fungsi untuk mengubah program studi menggunakan getElementById() dan innerHTML
+        function ubahProdi() {
+            var prodiBaru = prompt("Masukkan program studi baru:");
+            if (prodiBaru !== null && prodiBaru.trim() !== "") {
+                var elementProdi = document.getElementById("prodi");
+                elementProdi.innerHTML = prodiBaru;
+            }
+        }
+
+        // Fungsi untuk trigger input file menggunakan getElementById()
+        function gantiGambar() {
+            var inputFile = document.getElementById("inputFile");
+            inputFile.click();
+        }
+
+        // Fungsi untuk upload foto menggunakan setAttribute() dan style
+        function uploadFoto() {
+            var inputFile = document.getElementById("inputFile");
+            var file = inputFile.files[0];
+            
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var fotoProfil = document.getElementById("fotoProfil");
+                    // Menggunakan setAttribute untuk mengubah src
+                    fotoProfil.setAttribute("src", e.target.result);
+                    fotoProfil.setAttribute("alt", "Foto Profil Baru");
+                    
+                    // Menggunakan style untuk efek transisi
+                    fotoProfil.style.opacity = "0";
+                    setTimeout(function() {
+                        fotoProfil.style.transition = "opacity 0.5s ease";
+                        fotoProfil.style.opacity = "1";
+                    }, 100);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Fungsi untuk toggle tampilan biodata menggunakan style dan innerHTML untuk text tombol
+        var biodataVisible = true;
+        function toggleBiodata() {
+            var biodataSection = document.getElementById("biodataSection");
+            var toggleButton = document.querySelector(".btn-toggle");
+            
+            if (biodataVisible) {
+                // Sembunyikan biodata menggunakan style.display
+                biodataSection.style.display = "none";
+                // Ubah text tombol menggunakan innerHTML
+                toggleButton.innerHTML = "Tampilkan Biodata";
+                // Ubah style tombol
+                toggleButton.style.background = "linear-gradient(135deg, #fa709a 0%, #fee140 100%)";
+                biodataVisible = false;
+            } else {
+                // Tampilkan biodata menggunakan style.display
+                biodataSection.style.display = "block";
+                // Ubah text tombol menggunakan innerHTML
+                toggleButton.innerHTML = "Sembunyikan Biodata";
+                // Kembalikan style tombol
+                toggleButton.style.background = "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)";
+                biodataVisible = true;
+            }
+        }
+
+        // Contoh penggunaan tambahan HTML DOM methods saat halaman load
+        window.onload = function() {
+            // Menggunakan getElementById dan style untuk animasi fade in
+            var container = document.querySelector(".container");
+            container.style.opacity = "0";
+            container.style.transform = "translateY(20px)";
+            
+            setTimeout(function() {
+                container.style.transition = "all 0.5s ease";
+                container.style.opacity = "1";
+                container.style.transform = "translateY(0)";
+            }, 100);
+        }
+    </script>
+</body>
+</html>

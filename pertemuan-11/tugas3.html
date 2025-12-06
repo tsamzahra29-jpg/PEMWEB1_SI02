@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Interaktif dengan jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .question {
+            padding: 20px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        
+        .question::after {
+            content: "▼";
+            font-size: 0.9em;
+            transition: transform 0.3s ease;
+        }
+        
+        .question.active::after {
+            transform: rotate(180deg);
+        }
+        
+        .answer {
+            padding: 20px;
+            background-color: white;
+            color: #555;
+            line-height: 1.6;
+            border-top: 1px solid #e0e0e0;
+            display: none;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>❓ FAQ</h1>
+        <p class="subtitle">Frequently Asked Questions - Klik untuk melihat jawaban</p>
+        
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="question">
+                    <span><span class="icon">📝</span>Apa itu jQuery?</span>
+                </div>
+                <div class="answer">
+                    jQuery adalah library JavaScript yang cepat, kecil, dan kaya fitur. Library ini membuat manipulasi HTML dokumen, penanganan event, animasi, dan Ajax menjadi lebih mudah dengan API yang bekerja di berbagai browser.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="question">
+                    <span><span class="icon">💻</span>Bagaimana cara menginstall jQuery?</span>
+                </div>
+                <div class="answer">
+                    Ada beberapa cara: 1) Download dari jquery.com dan host sendiri, 2) Gunakan CDN seperti Google atau jQuery CDN, 3) Install via npm dengan perintah "npm install jquery". Cara termudah adalah menggunakan CDN dengan menambahkan tag script di HTML Anda.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="question">
+                    <span><span class="icon">🎯</span>Apa perbedaan jQuery dan JavaScript?</span>
+                </div>
+                <div class="answer">
+                    JavaScript adalah bahasa pemrograman, sedangkan jQuery adalah library JavaScript. jQuery dibuat untuk menyederhanakan penggunaan JavaScript, terutama untuk manipulasi DOM, event handling, dan Ajax. jQuery menulis kode lebih singkat dan mudah dibaca.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="question">
+                    <span><span class="icon">⚡</span>Apakah jQuery masih relevan di 2025?</span>
+                </div>
+                <div class="answer">
+                    Meskipun framework modern seperti React, Vue, dan Angular lebih populer untuk aplikasi kompleks, jQuery masih relevan untuk proyek sederhana, website legacy, dan prototyping cepat. Banyak website besar masih menggunakan jQuery karena kesederhanaan dan kompatibilitasnya.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="question">
+                    <span><span class="icon">🔧</span>Apa fungsi utama jQuery yang paling sering digunakan?</span>
+                </div>
+                <div class="answer">
+                    Fungsi yang paling sering digunakan meliputi: selector ($), event handlers (.click(), .hover()), manipulasi DOM (.html(), .css(), .append()), effects (.show(), .hide(), .toggle(), .fadeIn()), dan Ajax (.ajax(), .get(), .post()). Semuanya dirancang untuk membuat development lebih cepat dan efisien.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="question">
+                    <span><span class="icon">🎨</span>Bagaimana cara membuat animasi dengan jQuery?</span>
+                </div>
+                <div class="answer">
+                    jQuery menyediakan berbagai method untuk animasi seperti .fadeIn(), .fadeOut(), .slideUp(), .slideDown(), .toggle(), dan .animate() untuk animasi custom. Anda juga bisa mengatur durasi, easing, dan callback function untuk kontrol yang lebih detail.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Event click untuk toggle jawaban
+            $('.question').click(function() {
+                // Toggle class active untuk rotasi icon
+                $(this).toggleClass('active');
+                
+                // Toggle tampilkan/sembunyikan jawaban
+                $(this).next('.answer').toggle(300);
+            });
+            
+            // Event hover untuk mengubah warna
+            $('.question').hover(
+                function() {
+                    // Mouse enter - ubah ke biru
+                    $(this).css({
+                        'background-color': '#4169E1',
+                        'color': 'white'
+                    });
+                },
+                function() {
+                    // Mouse leave - kembali normal
+                    $(this).css({
+                        'background-color': '#f8f9fa',
+                        'color': '#333'
+                    });
+                }
+            );
+        });
+    </script>
+</body>
+</html>
